@@ -176,7 +176,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "gscc"
+name = "gsc"
 version = "0.1.0"
 dependencies = [
  "clap",
