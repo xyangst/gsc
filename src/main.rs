@@ -1,18 +1,28 @@
 mod analyse;
 pub mod error;
 use analyse::Analysis;
-use clap::Parser;
+use clap::{builder::Styles, Parser};
 pub use error::{Error, Result};
 use ignore::Walk;
 use std::{collections::HashMap, path::Path};
+fn get_styles() -> Styles {
+    use clap::builder::styling::AnsiColor::*;
+    use clap::builder::styling::*;
+    Styles::styled()
+        .header(Yellow.on_default())
+        .usage(Green.on_default())
+        .literal(Green.on_default())
+        .placeholder(Green.on_default())
+}
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
+#[command(styles=get_styles())]
 struct Cli {
-    /// Optional name to operate on
+    ///Path of Folder
     #[arg(default_value = "./")]
     name: String,
 
-    ///amount of file extensions to display
+    ///Amount of file extensions to display
     #[arg(short, long, default_value_t = 6)]
     amount: usize,
 }
